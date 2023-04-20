@@ -4,6 +4,7 @@ import beautiful from '../assets/beautiful.png'
 import vintage from '../assets/vintage.png' 
 import winner from '../assets/winner.png' 
 import patriotic from '../assets/patriotic.png' 
+import axios, { AxiosError } from 'axios'
 
 export default {
     data() {
@@ -66,8 +67,12 @@ export default {
         changeData(hotdog) {
             this.src = hotdog.src;
             this.$emit('changeData', hotdog.hotdog);
-        }
-    },
+        },
+        fetchDogs (){
+        axios.get ('https://backend-for-vue-example. onrender. com/getDogs'). then (response => {
+        this.otherDogs = response. data;
+
+        },
     props: {
         hotdog: String
     },
@@ -114,7 +119,7 @@ export default {
                 Put some {{ otherDogs[10].hotdog }} on it
             </a>
 
-
+            <button v-on:click = "fetchDogs">Fetch Dogs</button>
         </div>
     </body>
 </template>
